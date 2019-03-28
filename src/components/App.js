@@ -1,12 +1,15 @@
 import React from "react";
-import {Route} from 'react-router-dom';
+import {Route,Link} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Header from "../components/header/Header";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import mainScss from "../style/main.scss";
 import TabComponent from "../components/tabComponent/TabComponent";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import MessagesComponent from "./messages/Messages";
+
 //swipeable
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -45,50 +48,77 @@ const styles = {
     }
 };
 
-class App extends React.Component{
+const leftMenuItems = [
+    {
+        name: "Profile",
+        icon: <AccountCircleIcon/>,
+        path:"/"
+    },
+    {
+        name: "Messages",
+        icon: <MailIcon/>,
+        path:"/messages"
+    }
+]
+
+class App extends React.Component {
 
 
+    renderSideList = () => {
 
-
-    renderSideList = () =>{
-
-        const { classes } = this.props;
+        const {classes} = this.props;
         return (
             <div className={classes.list}>
                 <Grid className="padding-30px image-bg-1" container justify="flex-start" alignItems="center">
-                    <Avatar alt="Remy Sharp" src={avatarImage} className={classes.bigAvatar} />
+                    <Avatar alt="Remy Sharp" src={avatarImage} className={classes.bigAvatar}/>
                     <div className="width-100-percent margin-left-10px margin-top-20px color-white">Ahmet Sarıca</div>
-                    <div className="width-100-percent margin-left-10px margin-top-5px color-white">sarica.ahmett@gmail.com</div>
+                    <div
+                        className="width-100-percent margin-left-10px margin-top-5px color-white">sarica.ahmett@gmail.com
+                    </div>
                 </Grid>
-                <Divider />
+                <Divider/>
                 <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+
+                    {
+                        leftMenuItems.map((leftMenuItem) => {
+                            return (<Link to={leftMenuItem.path} key={leftMenuItem.name}>
+                                <ListItem button>
+                                    <ListItemIcon>{leftMenuItem.icon}</ListItemIcon>
+                                    <ListItemText primary={leftMenuItem.name}/>
+                                </ListItem>
+                            </Link>)
+                        })
+                    }
                 </List>
             </div>
         );
     }
-    renderGrids = (drawerContext) =>{
-        const { classes } = this.props;
+    renderGrids = (drawerContext) => {
+        const {classes} = this.props;
+        return (
+            <React.Fragment>
+                <Route path="/messages" component={MessagesComponent}/>
+                <Route exact path="/" component={TabComponent}/>
+            </React.Fragment>
+        )
+    }
+
+    renderHeader = (drawerContext) => {
+        const {classes} = this.props;
         return <div className={classes.root}>
             <Grid container>
                 <Grid item xs={12}>
-                    <Header drawerContext = {drawerContext}></Header>
+                    <Header drawerContext={drawerContext}></Header>
                 </Grid>
                 <Grid item xs={12}>
                     <div>
-                        <TabComponent>
-                        </TabComponent>
+                        {this.renderGrids()}
                     </div>
                 </Grid>
             </Grid>
         </div>
     }
-    renderNavBar = (drawerContext) =>{
+    renderNavBar = (drawerContext) => {
         return <SwipeableDrawer
             open={drawerContext.state.left}
             onClose={drawerContext.toggleDrawer('left', false)}
@@ -105,7 +135,7 @@ class App extends React.Component{
         </SwipeableDrawer>
     }
 
-    render(){
+    render() {
         return (
             <React.Fragment>
                 <CssBaseline>
@@ -116,7 +146,7 @@ class App extends React.Component{
                                     (context) => (
                                         <React.Fragment>
                                             {this.renderNavBar(context)}
-                                            {this.renderGrids(context)}
+                                            {this.renderHeader(context)}
                                         </React.Fragment>
                                     )
                                 }
