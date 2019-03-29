@@ -11,6 +11,8 @@ import messagesJson from "../../assets/json/messages";
 import "./messages.scss";
 import Divider from '@material-ui/core/Divider';
 import DetailDialog from "./dialogs/DetailDialog";
+import MessagesProvider from "../../providers/messagesProvider/MessagesProvider";
+import {MessagesContext} from "../../providers/messagesProvider/MessagesProvider";
 
 const styles = theme => ({
     root: {
@@ -72,7 +74,6 @@ class Messages extends React.Component {
     };
 
     handleButtonPress(message) {
-        console.log(message);
         this.setState({
             ...this.state,
             isClickStarted: true,
@@ -118,43 +119,60 @@ class Messages extends React.Component {
         }
     }
 
-    render() {
+    renderMessageList=(context)=>{
         const {classes} = this.props;
         return (
-            <React.Fragment>
-                <DetailDialog open={this.state.open}
-                              selectedMessage={this.state.selectedMessage}
-                              onClose={this.handleClose}/>
-                <List className={classes.root}>
+            <List className={classes.root}>
+                {
+                    context.state.messages.map((message) => {
+                        return <React.Fragment key={message.from.id}>
+                            <ListItem className={this.fillMessageRow(message.from.id)} alignItems="center"
+                                      onTouchStart={() => {
+                                          this.handleButtonPress(message)
+                                      }}
+                                      onTouchEnd={this.handleButtonRelease}
+                                      onMouseDown={this.handleButtonPress}
+                                      onMouseUp={this.handleButtonRelease}
+                                      onMouseLeave={this.handleButtonRelease}>
+                                <div className="fake-circle">
+                                    <ListItemAvatar>
+                                        <Avatar alt="Remy Sharp" src={message.from.avatar}
+                                                className={classes.bigAvatar}/>
+                                    </ListItemAvatar>
+                                </div>
+                                <ListItemText className={this.isSeenText(message)}
+                                              primary={message.from.name + " " + message.from.surname}
+                                              secondary={message.text}
+                                />
+                                {this.isSeenIcon(message)}
+                            </ListItem>
+                            <Divider/>
+                        </React.Fragment>
+                    })
+                }
+            </List>
+        )
+    }
+
+    render() {
+
+        return (
+            <MessagesProvider>
+                <MessagesContext.Consumer>
                     {
-                        messagesJson.map((message) => {
-                            return <React.Fragment key={message.from.id}>
-                                <ListItem className={this.fillMessageRow(message.from.id)} alignItems="center"
-                                          onTouchStart={() => {
-                                              this.handleButtonPress(message)
-                                          }}
-                                          onTouchEnd={this.handleButtonRelease}
-                                          onMouseDown={this.handleButtonPress}
-                                          onMouseUp={this.handleButtonRelease}
-                                          onMouseLeave={this.handleButtonRelease}>
-                                    <div className="fake-circle">
-                                        <ListItemAvatar>
-                                            <Avatar alt="Remy Sharp" src={message.from.avatar}
-                                                    className={classes.bigAvatar}/>
-                                        </ListItemAvatar>
-                                    </div>
-                                    <ListItemText className={this.isSeenText(message)}
-                                                  primary={message.from.name + " " + message.from.surname}
-                                                  secondary={message.text}
-                                    />
-                                    {this.isSeenIcon(message)}
-                                </ListItem>
-                                <Divider/>
+                        (context) => (
+                            <React.Fragment>
+                                <DetailDialog open={this.state.open}
+                                              context={context}
+                                              selectedMessage={this.state.selectedMessage}
+                                              onClose={this.handleClose}>
+                                </DetailDialog>
+                                {this.renderMessageList(context)}
                             </React.Fragment>
-                        })
+                        )
                     }
-                </List>
-            </React.Fragment>
+                </MessagesContext.Consumer>
+            </MessagesProvider>
         )
     }
 }

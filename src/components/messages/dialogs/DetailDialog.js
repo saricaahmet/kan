@@ -36,18 +36,30 @@ class DetailDialog extends React.Component {
         const {selectedMessage} = this.props;
         if(!selectedMessage.isSeen){
             return (
-                <ListItem button key="markAsRead">
+                <ListItem button key="markAsRead" onClick={this.toggleRead}>
                     <ListItemText primary="Mark as Read" />
                 </ListItem>
             )
         }
         else{
             return (
-                <ListItem button key="markAsUnread">
+                <ListItem button key="markAsUnread" onClick={this.toggleRead}>
                     <ListItemText primary="Mark as Unread" />
                 </ListItem>
             )
         }
+    }
+
+    toggleRead = () =>{
+        const {selectedMessage,context} = this.props;
+        context.toggleRead(selectedMessage.from.id);
+        this.handleClose();
+    }
+
+    deleteMessage=()=>{
+        const {selectedMessage,context} = this.props;
+        context.deleteMessage(selectedMessage.from.id);
+        this.handleClose();
     }
 
     getName = (selectedMessage) =>{
@@ -67,7 +79,7 @@ class DetailDialog extends React.Component {
                     <Divider/>
                     <div>
                         <List>
-                            <ListItem button key="delete">
+                            <ListItem button key="delete" onClick={this.deleteMessage}>
                                 <ListItemText primary="Delete Message" />
                             </ListItem>
                             {this.renderMarkButtons()}
