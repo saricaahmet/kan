@@ -94,7 +94,7 @@ class Messages extends React.Component {
 
     isSeenIcon = (message) => {
         if (!message.isSeen) {
-            return <div className="unseen-icon"></div>
+            return <div className="unseen-icon flash"></div>
         }
     }
     isSeenText = (message) => {
@@ -119,7 +119,7 @@ class Messages extends React.Component {
         }
     }
 
-    renderMessageList=(context)=>{
+    renderMessageList = (context) => {
         const {classes} = this.props;
         return (
             <List className={classes.root}>
