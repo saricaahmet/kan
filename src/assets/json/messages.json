@@ -1,0 +1,79 @@
+[
+  {
+    "from":{
+      "id":"1",
+      "name":"Ahmet",
+      "surname":"Sarıca",
+      "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/marcoramires/128.jpg"
+    },
+    "text":"This is a message",
+    "date":"28.03.2019 - 14:10",
+    "isSeen":false
+  },
+  {
+    "from":{
+      "id":"2",
+      "name":"Nur",
+      "surname":"Sarıca",
+      "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/stephenmoon/128.jpg"
+    },
+    "text":"This one is a very very long message",
+    "date":"28.03.2019 - 14:10",
+    "isSeen":true
+  },
+  {
+    "from":{
+      "id":"3",
+      "name":"Okan",
+      "surname":"Sarıca",
+      "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"
+    },
+    "text":"This message is even longer. This message is even longer. This message is even longer.",
+    "date":"28.03.2019 - 14:10",
+    "isSeen":false
+  },
+  {
+    "from":{
+      "id":"4",
+      "name":"Kerem",
+      "surname":"Sarıca",
+      "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/bigmancho/128.jpg"
+    },
+    "text":"This is a message",
+    "date":"28.03.2019 - 14:10",
+    "isSeen":true
+  },
+  {
+    "from":{
+      "id":"5",
+      "name":"Kerem",
+      "surname":"Sarıca",
+      "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/bigmancho/128.jpg"
+    },
+    "text":"This is a message",
+    "date":"28.03.2019 - 14:10",
+    "isSeen":true
+  },
+  {
+    "from":{
+      "id":"6",
+      "name":"Kerem",
+      "surname":"Sarıca",
+      "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/bigmancho/128.jpg"
+    },
+    "text":"This is a message",
+    "date":"28.03.2019 - 14:10",
+    "isSeen":true
+  },
+  {
+    "from":{
+      "id":"7",
+      "name":"Kerem",
+      "surname":"Sarıca",
+      "avatar":"https://s3.amazonaws.com/uifaces/faces/twitter/bigmancho/128.jpg"
+    },
+    "text":"This is a message",
+    "date":"28.03.2019 - 14:10",
+    "isSeen":true
+  }
+]

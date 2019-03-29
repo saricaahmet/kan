@@ -1,0 +1,65 @@
+.action-buttons {
+  color: #00bcd4;
+}
+
+.like {
+  -webkit-animation: likeAnimation 2s infinite; /* Safari 4.0 - 8.0 */
+  animation: likeAnimation 2s 1;
+}
+
+@keyframes likeAnimation {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  20% {
+    transform: scale(4);
+  }
+  30% {
+    transform: scale(2.5);
+  }
+  40% {
+    transform: scale(2.7);
+  }
+  50% {
+    transform: scale(2.5);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(2.5);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+.like-action {
+  position: absolute;
+  top: 50%;
+  margin-top: -30px;
+  left: 50%;
+  margin-left: -30px;
+  opacity: 0;
+  transform-origin: center;
+  color:#ef5350;
+  /*color:rgba(255,255,255,0.7);*/
+  transform: scale(0);
+}
+
+.speed-dial{
+  button, button:hover{
+    background: transparent;
+    color: #00bcd4;
+    box-shadow: none;
+  }
+}
+
+#SpeedDialexample-actions{
+  padding-left: 20px;
+  button{
+    margin: 8px 0px;
+  }
+  svg{
+    font-size: 18px;
+  }
+}

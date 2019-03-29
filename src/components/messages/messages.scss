@@ -1,0 +1,37 @@
+.fake-circle{
+  padding: 2px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  div{
+    margin: 0px !important;
+  }
+}
+
+.unseen-icon{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #00bcd4;
+}
+
+.unseen-font{
+  span,p{
+    font-weight: 600;
+  }
+}
+
+
+@keyframes fill {
+  to {
+    background-size:100% 0;
+  }
+}
+
+
+.message-row{
+  background: linear-gradient( white , white) #b2ebf2 no-repeat 0 0;
+  mix-blend-mode: multiply;
+  background-size:  100% 100%;
+  -webkit-animation: fill 500ms forwards;
+  animation: fill 500ms forwards;
+}
